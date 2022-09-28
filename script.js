@@ -41,7 +41,6 @@ function knightMoves(start, dest) {
             new_node.parent = root;
 
             if (move[0] == dest[0] && move[1] == dest[1]) {
-                console.log('FOUND');
                 return new_node;
             }
             queue.push(new_node);
@@ -55,6 +54,7 @@ function knightMoves(start, dest) {
         route.push(node.parent.value);
         node = node.parent;
     }
+    console.log(`Found the shortest path! It only took ${route.length - 1} moves`);
     return route.reverse();
 }
 
