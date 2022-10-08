@@ -1,61 +1,34 @@
-import { Node } from './tree.js';
+import { container, cells, place_img, msg } from '/dom.js';
+import { knightMoves } from '/knight_moves.js';
 
-function get_legal_moves(field) {
-    const moves = [[2, 1], [2, -1], [1, -2], [-1, -2],
-    [-2, -1], [-2, 1], [-1, 2], [1, 2]];
-    const legal_moves = [];
-    for (let move of moves) {
-        const x = field[0] + move[0];
-        const y = field[1] + move[1];
-        if (!(x > 7 || x < 0 || y > 7 || y < 0)) {
-            legal_moves.push([x, y]);
-        }
-    }
-    return legal_moves;
+let start;
+let end;
+cells.forEach(cell => {
+    const row = parseInt(cell.getAttribute('data-row'));
+    const col = parseInt(cell.getAttribute('data-col'));
 
-}
+    cell.addEventListener('click', (e) => {
+        if(end){return;}
+        console.log(e);
 
-function knightMoves(start, dest) {
-    const board =
-        [['', '', '', '', '', '', '', '',],
-        ['', '', '', '', '', '', '', '',],
-        ['', '', '', '', '', '', '', '',],
-        ['', '', '', '', '', '', '', '',],
-        ['', '', '', '', '', '', '', '',],
-        ['', '', '', '', '', '', '', '',],
-        ['', '', '', '', '', '', '', '',],
-        ['', '', '', '', '', '', '', '',]];
+        place_img(cell, start);
+        cell.classList.add('start-end');
 
-    board[start[0]][start[1]] = 'S';
-    const root = new Node(start);
-
-    function generateTree(queue) {
-        const root = queue.shift();
-        const legal_moves = get_legal_moves(root.value);
-        for (let move of legal_moves) {
-            if (board[move[0]][move[1]]) { continue; }
-            board[move[0]][move[1]] = 'v';
-
-            const new_node = new Node(move);
-            root.children.push(new_node);
-            new_node.parent = root;
-
-            if (move[0] == dest[0] && move[1] == dest[1]) {
-                return new_node;
+        if (!start) { 
+            start = [row, col]; 
+            msg.textContent = "Place the destination point anywhere on the board:";}
+        else {
+            end = [row, col];
+            const path = knightMoves(start, end);
+            const len = path.length - 1;
+            msg.textContent = `The shortest path for the knight consists of: ${len} moves`;
+            for (let i = 1; i < len; i++) {
+                const point = path[i];
+                const cell = container.querySelector(`[data-row="${point[0]}"][data-col="${point[1]}"]`);
+                cell.classList.add('path');
+                if (path.length > 3) { cell.textContent = i; }
             }
-            queue.push(new_node);
         }
-        return generateTree(queue);
-    }
+    });
 
-    let node = generateTree([root]);
-    const route = [node.value];
-    while (node.parent) {
-        route.push(node.parent.value);
-        node = node.parent;
-    }
-    console.log(`Found the shortest path! It only took ${route.length - 1} moves`);
-    return route.reverse();
-}
-
-console.log(knightMoves([0, 0], [7, 7]));
+});

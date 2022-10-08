@@ -1,3 +1,67 @@
 .cell{
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 40px;
+    align-items: center;
+}
+.cell:hover{
+    background-color: rgb(236, 203, 16);
+}
+
+#board{
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: repeat(8, 80px);
+    grid-template-rows: repeat(8, 80px);
+    border-style: solid;
+    box-shadow: 0px 0px 15px 10px rgb(0, 0, 0, 0.5);
+    width:fit-content;
+    margin: 0 auto;
+    margin-top: 60px;
+    box-sizing: border-box;
+}
+
+.black{
+    background-color: black;
+}
+
+img{
+    width: 85px;
+}
+
+
+#message{
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    font-size: 50px;
+}
+
+.path{
     background-color: red;
+}
+
+.start-end{
+    background-color: rgb(236, 203, 16);
+}
+
+#message{
+    font-size: 40px;
+}
+
+#reset{
+    font-size: 30px;
+    padding: 20px;
+    width: 200px;
+    background-color: black;
+    color: white;
+    margin: auto;
+
+}
+
+#btn-wrapper{
+    margin-top: 40px;
+    text-align: center;
 }
