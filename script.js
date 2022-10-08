@@ -1,5 +1,5 @@
-import { container, cells, place_img, msg } from '/dom.js';
-import { knightMoves } from '/knight_moves.js';
+import { container, cells, place_img, msg } from './dom.js';
+import { knightMoves } from './knight_moves.js';
 
 let start;
 let end;

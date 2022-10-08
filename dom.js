@@ -1,6 +1,7 @@
 const container = document.querySelector('#board');
 const msg = document.querySelector('#message');
 
+//image loading
 const knight_img = document.createElement('img');
 const finish_img = document.createElement('img');
 knight_img.setAttribute('style', 'width: 65px;');
