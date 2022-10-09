@@ -1,6 +1,6 @@
 import { Node } from './tree.js';
 
-function get_legal_moves(field) {
+function getLegalMoves(field) {
     const moves = [[2, 1], [2, -1], [1, -2], [-1, -2],
     [-2, -1], [-2, 1], [-1, 2], [1, 2]];
     const legal_moves = [];
@@ -31,7 +31,7 @@ function knightMoves(start, dest) {
 
     function generateTree(queue) {
         const root = queue.shift();
-        const legal_moves = get_legal_moves(root.value);
+        const legal_moves = getLegalMoves(root.value);
         for (let move of legal_moves) {
             if (board[move[0]][move[1]]) { continue; }
             board[move[0]][move[1]] = 'v';
