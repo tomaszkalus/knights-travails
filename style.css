@@ -52,13 +52,18 @@ img{
 }
 
 #reset{
+    transition: all 0.2s ease;
     font-size: 30px;
     padding: 20px;
     width: 200px;
     background-color: black;
     color: white;
-    margin: auto;
+    cursor: pointer;
+}
 
+#reset:hover{
+    background-color: white;
+    color: black
 }
 
 #btn-wrapper{

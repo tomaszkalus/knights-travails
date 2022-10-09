@@ -1,4 +1,4 @@
-import { container, cells, place_img, msg } from './dom.js';
+import { container, cells, place_img, msg, reset, clear_board } from './dom.js';
 import { knightMoves } from './knight_moves.js';
 
 let start;
@@ -8,15 +8,15 @@ cells.forEach(cell => {
     const col = parseInt(cell.getAttribute('data-col'));
 
     cell.addEventListener('click', (e) => {
-        if(end){return;}
-        console.log(e);
+        if (end) { return; }
 
         place_img(cell, start);
         cell.classList.add('start-end');
 
-        if (!start) { 
-            start = [row, col]; 
-            msg.textContent = "Place the destination point anywhere on the board:";}
+        if (!start) {
+            start = [row, col];
+            msg.textContent = "Place the destination point anywhere on the board:";
+        }
         else {
             end = [row, col];
             const path = knightMoves(start, end);
@@ -32,3 +32,11 @@ cells.forEach(cell => {
     });
 
 });
+
+reset.addEventListener('click', () => {
+    start = null;
+    end = null;
+    clear_board(cells);
+    msg.textContent = "Place the pawn anywhere on the board:";
+
+})
